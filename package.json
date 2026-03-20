@@ -4,7 +4,9 @@
   "description": "Aprendento o projeto.",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run services:up && next dev",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "services:up": "sudo docker compose -f infra/compose.yaml up -d",
     "services:stop": "sudo docker compose -f infra/compose.yaml stop",
     "services:down": "sudo docker compose -f infra/compose.yaml down",
