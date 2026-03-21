@@ -1,27 +1,29 @@
-import database from "infra/database";
+import database from "infra/database.js";
 
-const migrationsUrl = "http://localhost:3000/api/v1/migrations";
+beforeAll(cleanDatabase);
 
-async function clearMigrations() {
-  await database.query("DROP SCHEMA public CASCADE; CREATE SCHEMA public;");
+async function cleanDatabase() {
+  await database.query("drop schema public cascade; create schema public;");
 }
 
-beforeAll(async () => {
-  await clearMigrations();
-});
+test("POST to /api/v1/migrations should return 200", async () => {
+  const response1 = await fetch("http://localhost:3000/api/v1/migrations", {
+    method: "POST",
+  });
+  expect(response1.status).toBe(201);
 
-test("POST to /api/v1/migrations should runed successfully", async () => {
-  const response = await fetch(migrationsUrl, { method: "POST" });
-  expect(response.status).toBe(201);
-  const eresponseBody = await response.json();
-  expect(Array.isArray(eresponseBody)).toBe(true);
-  expect(eresponseBody.length).toBeGreaterThan(0);
-});
+  const response1Body = await response1.json();
 
-test("POST to /api/v1/migrations runned successfully should return empty array", async () => {
-  const response = await fetch(migrationsUrl, { method: "POST" });
-  expect(response.status).toBe(200);
-  const eresponseBody = await response.json();
-  expect(Array.isArray(eresponseBody)).toBe(true);
-  expect(eresponseBody.length).toBe(0);
+  expect(Array.isArray(response1Body)).toBe(true);
+  expect(response1Body.length).toBeGreaterThan(0);
+
+  const response2 = await fetch("http://localhost:3000/api/v1/migrations", {
+    method: "POST",
+  });
+  expect(response2.status).toBe(200);
+
+  const response2Body = await response2.json();
+
+  expect(Array.isArray(response2Body)).toBe(true);
+  expect(response2Body.length).toBe(0);
 });
