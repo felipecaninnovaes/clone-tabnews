@@ -1,4 +1,5 @@
 import { Client } from "pg";
+import { readFileSync } from "node:fs";
 
 async function query(queryObject) {
   const client = new Client({
@@ -23,11 +24,14 @@ async function query(queryObject) {
 
 function getSSLValues() {
   if (process.env.POSTGRES_CA) {
-    return {
-      ca: process.env.POSTGRES_CA,
-    };
+    return { ca: process.env.POSTGRES_CA };
   }
-  return process.env.NODE_ENV == 'development' ? false : false
+
+  if (process.env.POSTGRES_CA_PATH) {
+    return { ca: readFileSync(process.env.POSTGRES_CA_PATH) };
+  }
+
+  return process.env.NODE_ENV == "production" ? true : false;
 }
 
 export default {
