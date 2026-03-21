@@ -16,7 +16,7 @@ export default async function migration(request, response) {
       ...defaultMigrationRunnerOptions,
       dryRun: true,
     });
-    response.status(200).json(pendingMigrations);
+    return response.status(200).json(pendingMigrations);
   }
 
   if (request.method === "POST") {
@@ -24,11 +24,11 @@ export default async function migration(request, response) {
       defaultMigrationRunnerOptions,
     );
     if (migratedMigrations.length === 0) {
-      response.status(200).json(migratedMigrations);
+      return response.status(200).json(migratedMigrations);
     } else {
-      response.status(201).json(migratedMigrations);
+      return response.status(201).json(migratedMigrations);
     }
   }
 
-  response.status(405).json({ error: "Method not allowed" });
+  return response.status(405).json({ error: "Method not allowed" });
 }
