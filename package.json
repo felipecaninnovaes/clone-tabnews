@@ -14,8 +14,8 @@
     "lint:fix": "prettier --write .",
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "migration:create": "node-pg-migrate --migrations-dir infra/migration create",
-    "migration:up": "node-pg-migrate --migrations-dir infra/migration --envPath .env.development up"
+    "migration:create": "node-pg-migrate --migrations-dir infra/migrations create",
+    "migration:up": "node-pg-migrate --migrations-dir infra/migrations --envPath .env.development up"
   },
   "author": "",
   "license": "MIT",
@@ -23,7 +23,6 @@
     "dotenv": "^16.4.4",
     "next": "^13.1.6",
     "node-pg-migrate": "^7.9.1",
-    "node-pg-migrations": "^0.0.7",
     "pg": "^8.11.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
