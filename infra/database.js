@@ -31,7 +31,7 @@ function getSSLValues() {
     return { ca: readFileSync(process.env.POSTGRES_CA_PATH) };
   }
 
-  return process.env.NODE_ENV == "production" ? true : false;
+  return process.env.NODE_ENV == "production" ? false : false;
 }
 
 export default {
