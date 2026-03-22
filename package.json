@@ -12,7 +12,7 @@
     "services:down": "docker compose -f infra/compose.yaml down",
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write .",
-    "test": "npm run services:up && concurrently -n 'next,jest' --hide 'next' -k -s command-jest 'next dev' 'jest --runInBand'; npm run services:down",
+    "test": "npm run services:up && (concurrently -n \"next,jest\" --hide \"next\" -k -s command-jest \"next dev\" \"jest --runInBand\"; EXIT_CODE=$?; npm run services:down; exit $EXIT_CODE)",
     "test:watch": "jest --runInBand --watchAll",
     "migration:create": "node-pg-migrate --migrations-dir infra/migrations create",
     "migration:up": "node-pg-migrate --migrations-dir infra/migrations --envPath .env.development up",
