@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "miguelsolorio.symbols",
+    "editorconfig.editorconfig",
+    "formulahendry.code-runner",
+    "tamasfe.even-better-toml",
+    "esbenp.prettier-vscode",
+    "castrogusttavo.min-theme",
+    "ms-ceintl.vscode-language-pack-pt-br"
+  ]
+}
