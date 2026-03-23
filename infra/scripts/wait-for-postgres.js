@@ -6,8 +6,9 @@ function checkPostgresConnection() {
     handleReturn,
   );
 
+  // eslint-disable-next-line no-unused-vars
   function handleReturn(error, stdout, stderr) {
-    if (stdout.search("accepting connections") === -1) {
+    if (!stdout || !stdout.includes("accepting connections")) {
       console.log("🟡 Não está aceitando conexões, tentando novamente...");
       setTimeout(checkPostgresConnection, 1000);
       return;
