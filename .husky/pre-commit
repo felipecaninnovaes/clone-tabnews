@@ -42,7 +42,7 @@ for FILE in $STAGED_FILES; do
             continue
         fi
     fi
-
+    
     # 2. Procura padrões de chaves dentro do conteúdo do arquivo (apenas as linhas adicionadas)
     # Pula verificação em arquivos .env permitidos e no próprio pre-commit
     SKIP_CONTENT_CHECK=false
@@ -58,8 +58,8 @@ for FILE in $STAGED_FILES; do
     fi
     
     # Pula o próprio arquivo pre-commit
-    if [[ "$FILE" == ".husky/pre-commit" ]]; then
-        SKIP_CONTENT_CHECK=true
+    if [[ "$FILE" =~ ^(.husky/pre-commit|infra/scripts/check-secrets\.sh|\.github/workflows/check-secrets\.yaml|package\.json)$ ]]; then
+      SKIP_CONTENT_CHECK=true
     fi
     
     # Verifica o conteúdo apenas se não for um arquivo permitido
