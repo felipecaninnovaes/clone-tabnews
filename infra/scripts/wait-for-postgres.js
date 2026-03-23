@@ -6,7 +6,7 @@ function checkPostgresConnection() {
     handleReturn,
   );
 
-  function handleReturn(error, stdout, stderr) {
+  function handleReturn(stdout) {
     if (stdout.search("accepting connections") === -1) {
       console.log("🟡 Não está aceitando conexões, tentando novamente...");
       setTimeout(checkPostgresConnection, 1000);
