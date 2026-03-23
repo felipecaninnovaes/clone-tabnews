@@ -14,6 +14,7 @@
     "lint:prettier:fix": "prettier --write .",
     "lint:eslint:check": "next lint --dir .",
     "lint:eslint:fix": "next lint --fix",
+    "lint:all:check": "npm run lint:prettier:check && npm run lint:eslint:check",
     "test": "npm run services:up && (concurrently -n \"next,jest\" --hide \"next\" -k -s command-jest \"next dev\" \"jest --runInBand\"; EXIT_CODE=$?; npm run services:down; exit $EXIT_CODE)",
     "test:watch": "jest --runInBand --watchAll",
     "migration:create": "node-pg-migrate --migrations-dir infra/migrations create",
