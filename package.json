@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm run services:database:up &&  npm run migrations:up && next dev && npm run services:database:down",
-    "test": "npm run services:database:up && (concurrently -n \"next,jest\" --hide \"next\" -k -s command-jest \"next dev\" \"jest --runInBand\"; EXIT_CODE=$?; npm run services:database:down; exit $EXIT_CODE)",
-    "test:watch": "jest --runInBand --watchAll",
+    "test": "npm run services:database:up && (concurrently -n \"next,jest\" --hide \"next\" -k -s command-jest \"next dev\" \"jest --runInBand --verbose\"; EXIT_CODE=$?; npm run services:database:down; exit $EXIT_CODE)",
+    "test:watch": "jest --runInBand --watchAll --verbose",
     "build": "next build",
     "start": "next start",
     "services:database:up": "docker compose -f infra/compose.yaml up -d && npm run services:database:wait",
