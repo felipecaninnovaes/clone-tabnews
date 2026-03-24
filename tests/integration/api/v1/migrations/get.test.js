@@ -11,13 +11,13 @@ beforeAll(async () => {
 describe("GET /api/v1/migrations", () => {
   describe("Anonymous user", () => {
     test("Retrieving pending migrations", async () => {
-      const response = await fetch(URL, { method: "GET" });
-      expect(response.status).toBe(200);
+      const getResponse = await fetch(URL, { method: "GET" });
+      expect(getResponse.status).toBe(200);
 
-      const responseBody = await response.json();
+      const getResponseBody = await getResponse.json();
 
-      expect(Array.isArray(responseBody)).toBe(true);
-      expect(responseBody.length).toBeGreaterThan(0);
+      expect(Array.isArray(getResponseBody)).toBe(true);
+      expect(getResponseBody.length).toBeGreaterThan(0);
     });
   });
 });
