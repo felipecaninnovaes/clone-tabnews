@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm run services:database:up &&  npm run migrations:up && next dev && npm run services:database:down",
+    "test": "npm run services:database:up && (concurrently -n \"next,jest\" --hide \"next\" -k -s command-jest \"next dev\" \"jest --runInBand\"; EXIT_CODE=$?; npm run services:database:down; exit $EXIT_CODE)",
+    "test:watch": "jest --runInBand --watchAll",
     "build": "next build",
     "start": "next start",
     "services:database:up": "docker compose -f infra/compose.yaml up -d && npm run services:database:wait",
@@ -18,8 +20,6 @@
     "lint:eslint:check": "next lint --dir .",
     "lint:eslint:fix": "next lint --fix",
     "lint:all:check": "npm run lint:prettier:check && npm run lint:eslint:check",
-    "test": "npm run services:database:up && (concurrently -n \"next,jest\" --hide \"next\" -k -s command-jest \"next dev\" \"jest --runInBand\"; EXIT_CODE=$?; npm run services:database:down; exit $EXIT_CODE)",
-    "test:watch": "jest --runInBand --watchAll",
     "security:check": "bash infra/scripts/check-secrets.sh",
     "commit": "cz",
     "prepare": "husky",
