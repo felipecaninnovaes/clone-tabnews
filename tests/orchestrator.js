@@ -1,4 +1,5 @@
 import retry from "async-retry";
+import database from "infra/database.js";
 
 async function waitForAllServicesToBeReady() {
   await waitForWebServiceToBeReady("http://localhost:3000/api/v1/status");
@@ -21,8 +22,13 @@ async function waitForAllServicesToBeReady() {
   }
 }
 
+async function cleanDatabaseSchema() {
+  await database.query("drop schema public cascade; create schema public;");
+}
+
 const orchestrator = {
   waitForAllServicesToBeReady,
+  cleanDatabaseSchema,
 };
 
 export default orchestrator;
